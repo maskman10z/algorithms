@@ -5,17 +5,19 @@ import com.maskman.algorithms.datastructures.Node;
 public class DepthFirstSearch<T> {
 	
 	
-	public T find(Node<T> node, T value) {
-		if(node.getValue() == value) {
+	public T find(Node<T> root, T value) {
+		if(root.getValue() == value) {
 			return value;
-		} else if(node.getChildren().isEmpty()) {
+		} else if(root.getChildren().isEmpty()) {
 			return null;
 		} else {
-			for(Node<T> child : node.getChildren()) {
-				T val = find(child, value);
-				return val == null ? null : val;
+			T val = null;
+			for(Node<T> child : root.getChildren()) {
+				val = find(child, value);
+				if(val != null)
+					break;
 			}
+			return val;
 		}
-		return null;
 	}
 }
